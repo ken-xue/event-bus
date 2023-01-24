@@ -6,7 +6,7 @@
 # QuickStart
 
 ```bash
-go get github/ken-xue/event-bus
+go get github.com/ken-xue/event-bus
 ```
 
 ```go
