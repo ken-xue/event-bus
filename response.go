@@ -1,8 +1,6 @@
 package event
 
 type Response struct {
-	Code    int         `json:"code"`
-	Data    interface{} `json:"data"`
-	Message string      `json:"message"`
-	Error   error       `json:"error"`
+	Data  interface{} `json:"data"`
+	Error error       `json:"error"`
 }
