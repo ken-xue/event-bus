@@ -24,7 +24,7 @@ func (p *DefaultEventHub) Get(handlerName string) (handlers []Handler, err error
 	handlers = p.handlerMap[handlerName]
 	if len(handlers) <= 0 {
 		m := fmt.Sprintf("Could not found handler: %v", handlerName)
-		log.Fatalf(m)
+		log.Println(m)
 		err = errors.New(m)
 	}
 	return
@@ -32,9 +32,9 @@ func (p *DefaultEventHub) Get(handlerName string) (handlers []Handler, err error
 
 func (p *DefaultEventHub) Register(handler Handler) (err error) {
 	handlerType := reflect.TypeOf(handler)
-	eventName := handlerType.Name()
-	p.RegisterWithName(eventName, handler)
-	return
+	handlerName := handlerType.Name()
+	log.Println("register handler : ", handlerName)
+	return p.RegisterWithName(handlerName, handler)
 }
 
 func (p *DefaultEventHub) RegisterWithName(handlerName string, handler Handler) (err error) {
@@ -43,6 +43,7 @@ func (p *DefaultEventHub) RegisterWithName(handlerName string, handler Handler) 
 		handlers = make([]Handler, 0)
 	}
 	handlers = append(handlers, handler)
+	log.Println("register handler : ", handlerName)
 	p.handlerMap[handlerName] = handlers
 	return
 }

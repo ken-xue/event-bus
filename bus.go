@@ -18,11 +18,11 @@ type DefaultEventBus struct {
 func (p *DefaultEventBus) Publish(event Event) (response Response) {
 	handlers, err := p.Hub.Get(event.GetHandlerName())
 	if err != nil {
-		log.Fatal("publish error :", err)
+		log.Println("publish error :", err)
 		return
 	}
 	if len(handlers) <= 0 {
-		log.Fatal("not found handler for event :", event)
+		log.Println("not found handler for event :", event)
 		return
 	}
 	response = handlers[0].Execute(event)
@@ -32,11 +32,11 @@ func (p *DefaultEventBus) Publish(event Event) (response Response) {
 func (p *DefaultEventBus) PublishAll(event Event) (responses []Response) {
 	handlers, err := p.Hub.Get(event.GetHandlerName())
 	if err != nil {
-		log.Fatal("publish error :", err)
+		log.Println("publish error :", err)
 		return
 	}
 	if len(handlers) <= 0 {
-		log.Fatal("not found handler for event :", event)
+		log.Println("not found handler for event :", event)
 		return
 	}
 	responses = make([]Response, len(handlers))
