@@ -1,4 +1,4 @@
-package event
+package eventbus
 
 import (
 	"errors"
@@ -20,12 +20,14 @@ type DefaultEventHub struct {
 	handlerMap map[string][]Handler
 }
 
+func NewDefaultEventHub() *DefaultEventHub {
+	return &DefaultEventHub{handlerMap: make(map[string][]Handler)}
+}
+
 func (p *DefaultEventHub) Get(handlerName string) (handlers []Handler, err error) {
 	handlers = p.handlerMap[handlerName]
 	if len(handlers) <= 0 {
-		m := fmt.Sprintf("Could not found handler: %v", handlerName)
-		log.Println(m)
-		err = errors.New(m)
+		err = errors.New(fmt.Sprintf("Could not found handler: %v", handlerName))
 	}
 	return
 }

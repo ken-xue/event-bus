@@ -1,4 +1,4 @@
-package event
+package eventbus
 
 import (
 	"fmt"
@@ -25,11 +25,11 @@ func (p PipelineOnlineEventHandler) Execute(event Event) (re Response) {
 }
 
 func TestEvent(t *testing.T) {
-	t.Log(EventBus)
-	EventBus.Register(PipelineOnlineEventHandler{})
-	EventBus.RegisterWithName(PipelineOnlineEvent{}.GetHandlerName(), PipelineOnlineEventHandler{})
-	EventBus.Publish(PipelineOnlineEvent{"test"})
-	EventBus.PublishAll(PipelineOnlineEvent{"test"})
-	EventBus.AsyncPublish(PipelineOnlineEvent{"test"})
-	EventBus.AsyncPublishAll(PipelineOnlineEvent{"test"})
+	t.Log(eventBus)
+	Register(PipelineOnlineEventHandler{})
+	RegisterWithName(PipelineOnlineEvent{}.GetHandlerName(), PipelineOnlineEventHandler{})
+	Publish(PipelineOnlineEvent{"test"})
+	PublishAll(PipelineOnlineEvent{"test"})
+	AsyncPublish(PipelineOnlineEvent{"test"})
+	AsyncPublishAll(PipelineOnlineEvent{"test"})
 }

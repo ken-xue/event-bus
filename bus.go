@@ -1,4 +1,4 @@
-package event
+package eventbus
 
 import (
 	"log"
@@ -58,8 +58,6 @@ func (p *DefaultEventBus) AsyncPublishAll(event Event) {
 	}()
 }
 
-var EventBus = &DefaultEventBus{
-	Hub: &DefaultEventHub{
-		handlerMap: make(map[string][]Handler),
-	},
+func NewEventBus(hub Hub) *DefaultEventBus {
+	return &DefaultEventBus{Hub: hub}
 }

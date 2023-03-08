@@ -1,4 +1,4 @@
-package event
+package eventbus
 
 type Response struct {
 	Data  interface{} `json:"data"`
